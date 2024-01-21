@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Add new Book!
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<h1>Add new Book!</h1>
+
+<div class="mx-auto p-2">
+    <div class="mb-3">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <button class="btn btn-secondary">Save</button>
+        </form>
+    </div>
+</div>
+
+{% else %}
+<p>Please return to the Homepage! Or Login/Register to see this Page</p>
+{% endif %}
+
+{% endblock %}

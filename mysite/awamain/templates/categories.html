@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+{% if category_posts %}
+<h1>Category {{ category }}</h1>
+<div class="d-flex flex-wrap justify-content-center">
+    {% for post in category_posts %}
+
+    <a href="{% url 'book-detail' post.pk %}">
+        <div class="card m-2" style="width: 18rem; height: 100%;">
+            <img src="{% if post.book_cover %}{{ post.book_cover.url }}{% else %}{% static 'awamain/images/default_book_cover_awa.jpg' %}{% endif %}"
+                 class="card-img-top" alt="{{ post.title }}" style="object-fit: cover;">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{% url 'book-detail' post.pk %}">{{ post.title }}</a>
+                </h5>
+                <div class="card-text">
+                    by {{ post.author.first_name }} {{ post.author.last_name }}<br>
+                    Published: {{ post.pub_date }} - {{ post.total_likes }} like(s)
+                    <hr>
+                    <div class="scrollable-description" style="max-height: 100px; overflow-y: auto;">
+                        {{ post.description | safe }}
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">
+                    Category:
+                    {% for category in post.category.all %}
+                    <a href="{% url 'category' category.id %}" class="btn btn-sm btn-secondary"
+                       style="margin: 5px;">{{ category.name }}</a>
+                    {% endfor %}
+                </small>
+            </div>
+        </div>
+    </a>
+
+    {% endfor %}
+</div>
+{% else %}
+<p>This category does not exist yet...</p>
+{% endif %}
+{% endblock %}

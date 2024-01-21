@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Register to AWA
+{% endblock %}
+
+{% block content %}
+<h1>Register to AWA</h1>
+
+<div class="mx-auto p-2">
+    <div class="mb-3">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-secondary">Register</button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

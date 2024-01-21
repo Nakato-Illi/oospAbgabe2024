@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Comments
+{% endblock %}
+
+{% block content %}
+<!--{% if user.is_authenticated %}-->
+
+<div class="mx-auto p-2">
+    <div class="mb-3">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-secondary">Save Comment</button>
+        </form>
+    </div>
+</div>
+
+<!--{% else %}-->
+<!--<p>Please return to the Homepage! Or Login/Register to see this Page</p>-->
+<!--{% endif %}-->
+
+{% endblock %}

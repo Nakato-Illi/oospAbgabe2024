@@ -1,0 +1,13 @@
+ body {
+      min-height: 100vh; /* Set the minimum height of the body to 100% of the viewport height */
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1; /* Allow the main content to grow and take up remaining space */
+    }
+
+    footer {
+      background-color: rgba(0, 0, 0, 0.05);
+ }

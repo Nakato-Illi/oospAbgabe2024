@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Login to AWA
+{% endblock %}
+
+{% block content %}
+<h1>Login to AWA</h1>
+
+<div class="mx-auto p-2">
+    <div class="mb-3">
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Username</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" name="username">
+            </div>
+
+            <div class="mb-3">
+              <label for="inputPassword5" class="form-label">Password</label>
+                <input type="password" id="inputPassword5" class="form-control" name="password">
+            <small>not yet part of our community? Then register <a href="{% url 'register' %}" role="button"> Here</a>!</small>
+            </div>
+
+            <button class="btn btn-secondary">Login</button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

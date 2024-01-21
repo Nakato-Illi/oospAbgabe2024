@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
+{% block content %}
+<div class="d-flex">
+    <a href="{% url 'home' %}" class="btn btn-secondary me-2">Home</a>
+    <a href="?pdf=1" class="btn btn-secondary me-2">Download Book</a>
+    {% if post.book_cover %}
+    <a href="{{ post.book_cover.url }}" download="book_cover.jpg" class="btn btn-secondary me-2">Download Image</a>
+    {% endif %}
+    {% if user.is_authenticated %}
+
+    {% if user.id != post.author.id %}
+    <form action="{% url 'like_book' post.pk %}" method="POST">
+        {% csrf_token %}
+        {% if liked %}
+        <button type="submit" class="btn btn-primary me-2" name="book_id" value="{{ post.id }}">
+            Unlike - {{ total_likes }} likes
+        </button>
+        {% else %}
+        <button type="submit" class="btn btn-secondary me-2" name="book_id" value="{{ post.id }}">
+            Like - {{ total_likes }} likes
+        </button>
+        {% endif %}
+    </form>
+    <a href="{% url 'add-comment' post.pk %}" class="btn btn-secondary me-2">Add a Comment!</a>
+    {% endif %}
+
+    {% if user.id == post.author.id %}
+    <a href="{% url 'update-book' post.pk %}" class="btn btn-secondary me-2">Edit</a>
+    <a href="{% url 'delete-book' post.pk %}" class="btn btn-secondary me-2">Delete</a>
+    {% endif %}
+    {% else %}
+    <p>{{ total_likes }} like(s) - <a href="{% url 'login' %}">Login</a>
+        to like and to add comments</p>
+    {% endif %}
+</div>
+
+<h1>{{ post.title }}</h1>
+<small>By: {{ post.author.first_name }} {{ post.author.last_name }} | Published: {{ post.pub_date }} </small>
+<hr>
+
+<div class="row">
+    <div class="col-md-6">
+        <img src="{% if post.book_cover %}{{ post.book_cover.url }}{% else %}{% static 'awamain/images/default_book_cover_awa.jpg' %}{% endif %}"
+             class="img-fluid" alt="{{ post.title }}">
+    </div>
+
+    <div class="col-md-6">
+        <h2>Comments</h2>
+        {% if not post.comments.all %}
+        <p>No comments yet.</p>
+        {% if user.is_authenticated and user.id != post.author.id %}
+        <a href="{% url 'add-comment' post.pk %}">Add one!</a>
+        {% endif %}
+        {% else %}
+        {% if user.is_authenticated %}
+        {% if user.id != post.author.id %}
+        <a href="{% url 'add-comment' post.pk %}">Add a Comment!</a>
+        {% endif %}
+        {% endif %}
+        <br>
+        <div class="comment-container" style="height: auto; max-height: 35vh; overflow-y: auto; ">
+            {% for comment in post.comments.all %}
+            <div class="scrollable-description">
+                <p>
+                    {{ comment.author.username }} - {{ comment.date_added }} <br>
+                    {{ comment.body }}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+<hr>
+{{ post.body | safe }}
+
+{% endblock %}

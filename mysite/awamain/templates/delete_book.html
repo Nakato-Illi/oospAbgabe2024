@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Update Book
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.id ==  post.author.id %}
+
+<h1>Delete {{ post.title }} </h1>
+
+<div class="mx-auto p-2">
+    <div class="mb-3">
+        <form method="POST">
+            {% csrf_token %}
+          <p>Are you sure?</p>
+            <button class="btn btn-secondary">Delete Book!</button>
+        </form>
+    </div>
+</div>
+{% else %}
+<p>Please return to the Homepage! You can not delete the Work of the other AWAs. If you want to report the content leaf a message in the comment section of the Book</p>
+{% endif %}
+{% else %}
+<p>Please return to the Homepage! Or Login/Register to see this Page</p>
+{% endif %}
+
+
+{% endblock %}
