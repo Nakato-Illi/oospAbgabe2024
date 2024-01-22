@@ -1,18 +1,7 @@
 # Amazing Wannabe Author 
 
-## Django Book Blog |pypi version|
+## Django Book Blog
 ------------------------------
-
-:target: https://raw.githubusercontent.com/agusmakmun/django-markdown-editor/master/LICENSE
-
-.. image:: https://img.shields.io/badge/Django-1.8%20%3E=%203.0-green.svg
-  :target: https://www.djangoproject.com
-
-.. image:: https://weasyprint.org/css/img/logotype-white.gif
-  :target: https://doc.courtbouillon.org/weasyprint/v54.3/
-
-.. image:: https://opensource.org/wp-content/themes/osi/assets/img/osi-badge-light.svg
-  :target: https://opensource.org/license/mit/
 
 ## Description
 ------------------------------
