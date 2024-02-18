@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 # from django.utils.html import strip_tags
-import django.utils.html as d
+import django.utils.html as dhtml
 from django.views.generic.list import ListView
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
@@ -102,7 +102,7 @@ class BookDetailView(DetailView):
         y = 700
         p.drawString(start, y - 20, f"Author: {book.author}")
         p.drawString(start, y - 40, f"Published: {book.pub_date}")
-        stripped_body = d.strip_tags(book.body)
+        stripped_body = dhtml.strip_tags(book.body)
         stripped_body = stripped_body.replace('\n', linebreak)
         sy = y - 80
         split = stripped_body.split()
