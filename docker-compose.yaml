@@ -1,0 +1,43 @@
+version: "3.0"
+services:
+
+  #management
+#  portainer:
+#    container_name: portainer
+#    restart: always
+#    image: portainer/portainer-ce:latest
+#    security_opt:
+#      - no-new-privileges:true
+#    ports:
+#      - "9000:9000"
+#    networks:
+#      - kiddysafe-network
+#    volumes:
+#      - ./portainer/data:/data
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - /etc/localtime:/etc/localtime:ro
+
+  awa-service:
+    privileged: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: awa:1.0
+    container_name: awa_job
+
+    command: python mysite/manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    networks:
+      - awa-network
+
+    stdin_open: true
+    tty: true
+
+volumes:
+  influxdb-data:
+  grafana-data:
+
+networks:
+  awa-network:
+    driver: bridge
