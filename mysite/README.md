@@ -11,7 +11,7 @@ edit, delete, comment and like books.
 
 ## Installation
 * Create a virtual environment and download django in it
-* pip install WeasyPrint, Pillow, django-ckeditot (Textbody for book in add + undateview)
+* pip intall -r requirement.txt
 * clone project into an order of your choice
 * run pip install
 
